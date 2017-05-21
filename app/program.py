@@ -1,5 +1,5 @@
 """module to start The Agile Planner app by defining the main function"""
-from app import user_interface
+from app.ui import user_interface
 
 
 def main():
