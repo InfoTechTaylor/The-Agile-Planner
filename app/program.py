@@ -4,9 +4,10 @@ from app import user_interface
 
 def main():
     ui = user_interface.UserInterface()
-    ui.print_banner(staticmethod)
-    ui.print_menu(staticmethod)
-    ui.get_user_choice()
+    ui.print_banner()
+    ui.print_main_menu()
+    user_choice = ui.get_user_choice()
+    ui.start_user_choice(user_choice)
 
 if __name__ == '__main__':
     main()
