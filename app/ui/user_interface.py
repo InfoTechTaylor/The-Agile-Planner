@@ -1,18 +1,11 @@
 """Command line interface class for displaying output to the user"""
-from app.recipe import recipe
+
 from app.recipe import recipe_box
 
 
-class AbstractUserInterface:
-    def __init__(self, name):
-        self.name = name  # instance member: name
-
-
-class UserInterface(AbstractUserInterface):
-    def __init__(self):
-        def __init__(self, name, user_choice):
-            super().__init__(name)
-            self.user_choice = user_choice
+class UserInterface():
+    def __init__(self, mediator):
+        self._mediator = mediator
 
     @staticmethod
     def print_banner():
@@ -61,7 +54,8 @@ class UserInterface(AbstractUserInterface):
         """
 
         if user_choice == 1:
-            recipe.Recipe().add_new_recipe()
+            self._mediator.recipe.add_new_recipe()
+            # recipe.Recipe().add_new_recipe()
             self.print_main_menu()
             user_choice = self.get_user_choice()
             self.start_user_choice(user_choice)
@@ -71,10 +65,13 @@ class UserInterface(AbstractUserInterface):
             user_choice = self.get_user_choice()
             self.start_user_choice(user_choice)
         elif user_choice == 3:
-            pass
+            print('feature coming soon!')
+            self.print_main_menu()
+            user_choice = self.get_user_choice()
+            self.start_user_choice(user_choice)
         elif user_choice == 4:
             recipe_box.RecipeBox().get_all_recipes()
-            recipe.Recipe().edit_recipe()
+            self._mediator.recipe.update_recipe()
             self.print_main_menu()
             user_choice = self.get_user_choice()
             self.start_user_choice(user_choice)

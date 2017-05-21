@@ -1,11 +1,13 @@
 """recipe module for Recipe class"""
 
-
-class AbstractRecipe:
-    pass
+from app.mediator import abstract_meal_planner
 
 
-class Recipe(AbstractRecipe):
+class Recipe(abstract_meal_planner.AbstractMealPlanner):
+
+    def __init__(self, mediator):
+        super().__init__()
+        self._mediator = mediator
 
     def add_ingredients_list(self):
         ingredients_list = []
@@ -43,7 +45,7 @@ class Recipe(AbstractRecipe):
         # saturated_fat = input('    Saturated Fat: ')
         carbs = input('    Carbohydrates: ')
         # sugar = input('    Sugar: ')
-        protein =  input('    Protein: ')
+        protein = input('    Protein: ')
         # sodium = input('    Sodium: ')
         # fiber = input('    Fiber: ')
 
@@ -61,9 +63,11 @@ class Recipe(AbstractRecipe):
         recipe_box_csv.write('\n')
         recipe_box_csv.close()
 
-    def edit_recipe(self):
+    def update_recipe(self):
         recipe_name = input('Enter the name of the recipe you want to edit: ')
 
         recipe_box_csv = open('recipe/recipe_box.csv', 'r')
         for row in recipe_box_csv:
-            pass
+            if row[0] == recipe_name:
+                print('recipe found!')
+

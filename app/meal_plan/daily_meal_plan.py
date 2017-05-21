@@ -3,7 +3,7 @@
 from app.mediator import abstract_meal_planner
 
 
-class MealPlan(abstract_meal_planner.AbstractMealPlanner):
+class DailyMealPlan(abstract_meal_planner.AbstractMealPlanner):
     def __init__(self, mediator):
         super().__init__()
         self._mediator = mediator

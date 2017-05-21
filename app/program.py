@@ -1,9 +1,15 @@
-"""module to start The Agile Planner app by defining the main function"""
+# /usr/bin/env
+"""module to start The Agile Planner app by defining the main function
+This app was written using Python version 3.5.2"""
+
 from app.ui import user_interface
+from app.mediator import mediator_classes
 
 
 def main():
-    ui = user_interface.UserInterface()
+    mediator_obj = mediator_classes.Mediator()
+
+    ui = user_interface.UserInterface(mediator_obj)
     ui.print_banner()
     ui.print_main_menu()
     user_choice = ui.get_user_choice()
