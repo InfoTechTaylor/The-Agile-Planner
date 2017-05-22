@@ -65,7 +65,7 @@ class UserInterface():
             user_choice = self.get_user_choice()
             self.start_user_choice(user_choice)
         elif user_choice == 3:
-            print('feature coming soon!')
+            print('\nFEATURE COMING SOON!')
             self.print_main_menu()
             user_choice = self.get_user_choice()
             self.start_user_choice(user_choice)

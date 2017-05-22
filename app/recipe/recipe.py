@@ -64,10 +64,14 @@ class Recipe(abstract_meal_planner.AbstractMealPlanner):
         recipe_box_csv.close()
 
     def update_recipe(self):
-        recipe_name = input('Enter the name of the recipe you want to edit: ')
+        recipe_name_from_user = input('Enter the name of the recipe you want to edit: ')
 
         recipe_box_csv = open('recipe/recipe_box.csv', 'r')
         for row in recipe_box_csv:
-            if row[0] == recipe_name:
+            row = list(row)
+            recipe_name_from_file = row[0]
+            print('row: ' + str(row))
+            print('row at 0: ' + str(recipe_name_from_file))
+            if recipe_name_from_file == recipe_name_from_user:
                 print('recipe found!')
-
+        recipe_box_csv.close()
