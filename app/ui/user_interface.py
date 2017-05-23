@@ -46,6 +46,16 @@ class UserInterface():
 
         return user_choice
 
+    def print_recipe(self, recipe_obj):
+        print('-------------------------------------------------------------------'),
+        print('| Recipe: ' + recipe_obj.recipe_name),
+        print('| Nutritional Info: '),
+        print('|   Calories: ' + str(recipe_obj.calories))
+        print('|   Fat: ' + str(recipe_obj.fat))
+        print('|   Carbs: ' + str(recipe_obj.carbs))
+        print('|   Protein: ' + str(recipe_obj.protein))
+        print('-------------------------------------------------------------------')
+
     def start_user_choice(self, user_choice):
         """
         
@@ -55,7 +65,7 @@ class UserInterface():
 
         if user_choice == 1:
             self._mediator.recipe.add_new_recipe()
-            # recipe.Recipe().add_new_recipe()
+            # recipe.Recipe().add_new_recipe()  --> would have been implemented without mediator design pattern
             self.print_main_menu()
             user_choice = self.get_user_choice()
             self.start_user_choice(user_choice)

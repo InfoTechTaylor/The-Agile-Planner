@@ -1,19 +1,45 @@
 # /usr/bin/env
 """module to start The Agile Planner app by defining the main function
-This app was written using Python version 3.5.2"""
+This app was written using Python version 3.5.2
+This version of the app is implementing the Mediator design pattern"""
 
-from app.ui import user_interface
 from app.mediator import mediator_classes
 
 
 def main():
+    # to demonstrate mediator design implementation
     mediator_obj = mediator_classes.Mediator()
+    recipe_obj = mediator_obj.recipe
+    meal_obj = mediator_obj.meal
+    ui = mediator_obj.ui
 
-    ui = user_interface.UserInterface(mediator_obj)
-    ui.print_banner()
-    ui.print_main_menu()
-    user_choice = ui.get_user_choice()
-    ui.start_user_choice(user_choice)
+    # print recipe and meal prior to changes
+    ui.print_recipe(recipe_obj)  # UI & Recipe interaction through Mediator
+    # display meal information that contains the recipe object
+    print()
+    print('MEAL OVERVIEW:')
+    print(meal_obj.meal_type)
+    print(meal_obj.recipe.recipe_name)
+    print('Calories for Meal: ' + str(meal_obj.recipe.calories))
+    print()
+
+    # execute update_calories() method of Recipe
+    recipe_obj.update_calories(recipe_obj, 250)
+
+    # print recipe and meal after changes
+    ui.print_recipe(recipe_obj)  # UI & Recipe interaction through Mediator
+    # display meal information that contains the recipe object
+    print()
+    print('MEAL OVERVIEW:')
+    print(meal_obj.meal_type)
+    print(meal_obj.recipe.recipe_name)
+    print('Calories for Meal: ' + str(meal_obj.recipe.calories))
+    print()
+
+    # ui.print_banner()
+    # ui.print_main_menu()
+    # user_choice = ui.get_user_choice()
+    # ui.start_user_choice(user_choice)
 
 if __name__ == '__main__':
     main()

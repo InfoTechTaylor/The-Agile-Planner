@@ -5,9 +5,14 @@ from app.mediator import abstract_meal_planner
 
 class Recipe(abstract_meal_planner.AbstractMealPlanner):
 
-    def __init__(self, mediator):
-        super().__init__()
-        self._mediator = mediator
+    def __init__(self, mediator, recipe_name, calories, fat, carbs, protein):
+        super().__init__(mediator)
+        # self._mediator = mediator
+        self.recipe_name = recipe_name
+        self.calories = calories
+        self.fat = fat
+        self.carbs = carbs
+        self.protein = protein
 
     def add_ingredients_list(self):
         ingredients_list = []
@@ -63,7 +68,7 @@ class Recipe(abstract_meal_planner.AbstractMealPlanner):
         recipe_box_csv.write('\n')
         recipe_box_csv.close()
 
-    def update_recipe(self):
+    def update_recipe_from_csv(self):
         recipe_name_from_user = input('Enter the name of the recipe you want to edit: ')
 
         recipe_box_csv = open('recipe/recipe_box.csv', 'r')
@@ -75,3 +80,8 @@ class Recipe(abstract_meal_planner.AbstractMealPlanner):
             if recipe_name_from_file == recipe_name_from_user:
                 print('recipe found!')
         recipe_box_csv.close()
+
+    def update_calories(self, recipe_obj, updated_calories):
+
+        recipe_obj.calories = updated_calories
+        self._mediator.notify_update_calories(recipe_obj, updated_calories)

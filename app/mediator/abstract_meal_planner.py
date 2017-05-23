@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod # ABC = Abstract Base Class, for defining ab
 
 
 class AbstractMealPlanner(ABC):
-    def __init__(self):
-        pass
+    def __init__(self, mediator):
+        self._mediator = mediator
 
     @abstractmethod
-    def update_recipe(self):
-        raise NotImplementedError("Subclasses must implement the update_recipe() method.")
+    def update_calories(self, recipe_name, updated_calories):
+        raise NotImplementedError("Subclasses must implement the update_calories() method.")
