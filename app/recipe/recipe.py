@@ -7,7 +7,6 @@ class Recipe(abstract_meal_planner.AbstractMealPlanner):
 
     def __init__(self, mediator, recipe_name, calories, fat, carbs, protein):
         super().__init__(mediator)
-        # self._mediator = mediator
         self.recipe_name = recipe_name
         self.calories = calories
         self.fat = fat

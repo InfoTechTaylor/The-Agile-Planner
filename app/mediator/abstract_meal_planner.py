@@ -1,4 +1,7 @@
-from abc import ABC, abstractmethod # ABC = Abstract Base Class, for defining abstract classes
+"""module containing AbstractMealPlanner class for defining the methods that classes involved in meal 
+planning should have"""
+
+from abc import ABC, abstractmethod  # ABC = Abstract Base Class, for defining abstract classes
 
 
 class AbstractMealPlanner(ABC):

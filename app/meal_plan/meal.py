@@ -13,4 +13,5 @@ class Meal(abstract_meal_planner.AbstractMealPlanner):
         pass
 
     def update_calories(self, recipe_obj, updated_calories):
-        print('Calories in ' + str(recipe_obj.recipe_name) + ' updated to ' + str(updated_calories) + ' calories!')
+        print('*** Calories in ' + str(recipe_obj.recipe_name) + ' updated to ' + str(updated_calories)
+              + ' calories! ***')
