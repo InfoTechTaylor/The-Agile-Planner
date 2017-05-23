@@ -1,4 +1,4 @@
-""""""
+"""module for DailyMealPlan class"""
 
 from app.mediator import abstract_meal_planner
 
@@ -8,5 +8,5 @@ class DailyMealPlan(abstract_meal_planner.AbstractMealPlanner):
         super().__init__(mediator)
         # self._mediator = mediator
 
-    def update_calories(self, recipe_name, updated_calories):
+    def update_calories(self, recipe_obj, updated_calories):
         pass

@@ -6,5 +6,5 @@ class AbstractMealPlanner(ABC):
         self._mediator = mediator
 
     @abstractmethod
-    def update_calories(self, recipe_name, updated_calories):
+    def update_calories(self, recipe_obj, updated_calories):
         raise NotImplementedError("Subclasses must implement the update_calories() method.")

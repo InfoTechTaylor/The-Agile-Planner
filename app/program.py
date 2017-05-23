@@ -1,7 +1,7 @@
 # /usr/bin/env
 """module to start The Agile Planner app by defining the main function
-This app was written using Python version 3.5.2
-This version of the app is implementing the Mediator design pattern"""
+This version of the app is implementing the Mediator design pattern
+This app was written using Python version 3.5.2"""
 
 from app.mediator import mediator_classes
 
@@ -36,10 +36,6 @@ def main():
     print('Calories for Meal: ' + str(meal_obj.recipe.calories))
     print()
 
-    # ui.print_banner()
-    # ui.print_main_menu()
-    # user_choice = ui.get_user_choice()
-    # ui.start_user_choice(user_choice)
 
 if __name__ == '__main__':
     main()
