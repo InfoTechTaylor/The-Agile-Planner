@@ -16,9 +16,11 @@ def main():
     print('No AssertionError thrown, second user never created as both user variables are set to Taylor: ')
     print('User1 variable name: ' + str(user1.name))
     print('User2 variable name: ' + str(user2.name))
+    print()
 
-    # Facade implementation
+    # Facade implementation: access the add_new_recipe() method of Recipe through facade
     recipe_facade_obj = recipe_facade.RecipeFacade()
+    recipe_facade_obj.access_recipe_methods()
 
     # Adapter implementation
 
