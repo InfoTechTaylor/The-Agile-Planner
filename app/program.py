@@ -3,43 +3,27 @@
 This app was written using Python version 3.5.2
 This version of the app is implementing the Mediator design pattern"""
 
-from app.mediator import mediator_classes
+from app.ui import user
+from app.recipe import recipe_facade
 
 
 def main():
-    # to demonstrate mediator design implementation
-    mediator_obj = mediator_classes.Mediator()
-    recipe_obj = mediator_obj.recipe
-    meal_obj = mediator_obj.meal
-    ui = mediator_obj.ui
+    #  Singleton implementation: assert only one instance of User is created due to Singleton pattern on User
+    #  See app.ui.user for class implementation of Singleton
+    user1 = user.User('Taylor')
+    user2 = user.User('Brett')
+    assert user1 is user2
+    print('No AssertionError thrown, second user never created as both user variables are set to Taylor: ')
+    print('User1 variable name: ' + str(user1.name))
+    print('User2 variable name: ' + str(user2.name))
 
-    # print recipe and meal prior to changes
-    ui.print_recipe(recipe_obj)  # UI & Recipe interaction through Mediator
-    # display meal information that contains the recipe object
-    print()
-    print('MEAL OVERVIEW:')
-    print(meal_obj.meal_type)
-    print(meal_obj.recipe.recipe_name)
-    print('Calories for Meal: ' + str(meal_obj.recipe.calories))
-    print()
+    # Facade implementation
+    recipe_facade_obj = recipe_facade.RecipeFacade()
 
-    # execute update_calories() method of Recipe
-    recipe_obj.update_calories(recipe_obj, 250)
+    # Adapter implementation
 
-    # print recipe and meal after changes
-    ui.print_recipe(recipe_obj)  # UI & Recipe interaction through Mediator
-    # display meal information that contains the recipe object
-    print()
-    print('MEAL OVERVIEW:')
-    print(meal_obj.meal_type)
-    print(meal_obj.recipe.recipe_name)
-    print('Calories for Meal: ' + str(meal_obj.recipe.calories))
-    print()
+    # Factory implementation
 
-    # ui.print_banner()
-    # ui.print_main_menu()
-    # user_choice = ui.get_user_choice()
-    # ui.start_user_choice(user_choice)
 
 if __name__ == '__main__':
     main()
