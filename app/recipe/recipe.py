@@ -10,7 +10,6 @@ class Recipe(object):
         self.carbs = carbs
         self.protein = protein
 
-
     @classmethod
     def add_new_recipe(cls):
         print('Please enter a response for each prompt. ')
@@ -24,6 +23,6 @@ class Recipe(object):
         new_recipe = cls(recipe_name, calories, fat, protein, carbs)
 
         print()
-        print('New recipe created:')
+        print('New recipe created!')
 
         return new_recipe
