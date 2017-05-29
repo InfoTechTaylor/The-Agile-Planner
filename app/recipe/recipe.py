@@ -1,7 +1,7 @@
 """recipe module for Recipe class"""
 
 
-class Recipe():
+class Recipe(object):
 
     def __init__(self, recipe_name, calories, fat, carbs, protein):
         self.recipe_name = recipe_name
@@ -11,7 +11,8 @@ class Recipe():
         self.protein = protein
 
 
-    def add_new_recipe(self):
+    @classmethod
+    def add_new_recipe(cls):
         print('Please enter a response for each prompt. ')
         recipe_name = input('Enter recipe name: ')
         print('Nutritional info per 1 serving: ')
@@ -20,4 +21,9 @@ class Recipe():
         carbs = input('    Carbohydrates: ')
         protein = input('    Protein: ')
 
-        return Recipe(recipe_name, calories, fat, protein, carbs)
+        new_recipe = cls(recipe_name, calories, fat, protein, carbs)
+
+        print()
+        print('New recipe created:')
+
+        return new_recipe
