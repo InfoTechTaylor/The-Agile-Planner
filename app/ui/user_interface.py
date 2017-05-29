@@ -1,6 +1,4 @@
-"""Command line interface class for displaying output to the user"""
-
-from app.recipe import recipe_box
+"""Legacy command line interface class for displaying output to the user, to be accessed by adapter.py"""
 
 
 class UserInterface():
@@ -8,16 +6,17 @@ class UserInterface():
         pass
 
     @staticmethod
-    def print_welcome_banner():
+    def print_welcome_banner(user_name):
         print('***************************************************************')
         print('********************* The Agile Planner ***********************')
         print('***************************************************************')
         print()
-        print("Let's start meal planning!")
+        print("Hello, " + user_name + "! Let's start meal planning!")
         print("First, you'll enter a recipe you'd like to add to your meal plan.")
         print()
 
-    def print_recipe(self, recipe_obj):
+    @staticmethod
+    def print_recipe(recipe_obj):
         print('-------------------------------------------------------------------'),
         print('| Recipe: ' + recipe_obj.recipe_name),
         print('| Nutritional Info: '),

@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 class AbstractMealFactory(ABC):
     def __init__(self):
         pass
-        # self._recipe = recipe
 
     @abstractmethod
     def create_meal(self, meal_type):
