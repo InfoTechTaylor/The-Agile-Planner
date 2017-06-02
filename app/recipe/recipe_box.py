@@ -1,12 +1,16 @@
 """recipe_box module for RecipeBox class. Ensure that RecipeBox only has one instance by importing singleton.
 Implement singleton.Singleton as metaclass for RecipeBox"""
 
-from app import singleton
+from app.design_patterns import singleton
+from app.design_patterns import iterator
 
 
 class RecipeBox(metaclass=singleton.Singleton):  # RecipeBox is an instance of Singleton due to use of metaclass
     def __init__(self):
         self.recipe_obj_list = []
+
+    def __iter__(self):
+        return iterator.RecipeBoxIterator(self.recipe_obj_list)
 
     @classmethod
     def create_recipe_box(cls):

@@ -9,6 +9,10 @@ class RecipeFacade:
         self._recipe = recipe.Recipe
         self._recipe_box = recipe_box.RecipeBox
 
+    def hard_code_new_recipe(self, name, calories, fat, carbs, protein):
+        recipe = self._recipe(name, calories, fat, carbs, protein)
+        return recipe
+
     def add_new_recipe(self):
         new_recipe = self._recipe.add_new_recipe()
         return new_recipe
