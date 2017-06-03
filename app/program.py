@@ -24,7 +24,7 @@ def main():
 
     # Use Case #1 Precondition: Make RecipeBox instance
     recipe_facade_obj = recipe_facade.RecipeFacade()  # create facade object to access recipe module
-    recipe_box_obj = recipe_facade_obj.create_recipe_box(0)  # create recipe box to add recipes to
+    recipe_box_obj = recipe_facade_obj.create_recipe_box()  # create recipe box to add recipes to
 
     # Use Case #1 Precondition: populate RecipeBox instance with hard coded recipes (in place of DB implementation)
     recipe1 = recipe_facade_obj.hard_code_new_recipe('hummus', 98, 5.5, 9.9, 3.5)
@@ -39,11 +39,13 @@ def main():
     recipe_facade_obj.add_recipe_to_box(recipe_box_obj, recipe4)
 
     # Use Case #1 steps to display each recipe in the recipe box collection
-    recipe_box_iterator = iterator.RecipeBoxIterator(4)
-
+    recipe_count = len(recipe_box_obj.recipe_obj_list)
+    recipe_box_iterator = iterator.RecipeBoxIterator(recipe_count)
+    print()
     while True:
         try:
-            recipe = recipe_box_iterator.__next__()
+            recipe_index = recipe_box_iterator.__next__()
+            recipe = recipe_box_obj.recipe_obj_list[recipe_index]
             adapter_obj.display_recipe(recipe)
         except StopIteration:
             break

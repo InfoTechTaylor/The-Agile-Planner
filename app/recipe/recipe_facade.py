@@ -17,8 +17,8 @@ class RecipeFacade:
         new_recipe = self._recipe.add_new_recipe()
         return new_recipe
 
-    def create_recipe_box(self, value):
-        recipe_box_obj = self._recipe_box.create_recipe_box(value)
+    def create_recipe_box(self):
+        recipe_box_obj = self._recipe_box.create_recipe_box()
         return recipe_box_obj
 
     def add_recipe_to_box(self, recipe_box_obj, recipe_obj):
