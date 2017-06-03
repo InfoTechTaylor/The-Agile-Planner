@@ -7,6 +7,9 @@ class AbstractIterator(collections.abc.Iterable):
     def first(self):  # points to first element of collection
         pass
 
+    def __iter__(self):
+        pass
+
     def __next__(self):  # increments to the next element of the collection
         pass
 
@@ -18,13 +21,22 @@ class AbstractIterator(collections.abc.Iterable):
 
 
 class RecipeBoxIterator(AbstractIterator):
-    def __init__(self, recipe_obj_list):
-        self._recipe_obj_list = recipe_obj_list
+    def __init__(self, value):
+        self.value = value
+        self.index = 0
 
-    def first(self):
-        pass
+    def __iter__(self):
+        return self
 
     def __next__(self):
+        if self.index < self.value:
+            index = self.index
+            self.index += 1
+            return index
+        else:
+            raise StopIteration()
+
+    def first(self):
         pass
 
     def is_done(self):

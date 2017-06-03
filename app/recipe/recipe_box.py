@@ -6,14 +6,15 @@ from app.design_patterns import iterator
 
 
 class RecipeBox(metaclass=singleton.Singleton):  # RecipeBox is an instance of Singleton due to use of metaclass
-    def __init__(self):
+    def __init__(self, value):
         self.recipe_obj_list = []
+        self.value = value
 
     def __iter__(self):
-        return iterator.RecipeBoxIterator(self.recipe_obj_list)
+        return iterator.RecipeBoxIterator(self.value)
 
     @classmethod
-    def create_recipe_box(cls):
+    def create_recipe_box(cls, value):
         return cls()
 
     @staticmethod
