@@ -16,6 +16,10 @@ class AbstractUIAdapter(ABC):
     def display_recipe(self, recipe_obj):
         raise NotImplementedError('Subclasses must implement display_recipe()')
 
+    @abstractmethod
+    def display_menu(self):
+        pass
+
 
 class UIAdapter(AbstractUIAdapter):
     def display_banner(self, user_name):
@@ -23,3 +27,7 @@ class UIAdapter(AbstractUIAdapter):
 
     def display_recipe(self, recipe_obj):
         self._adaptee_ui.print_recipe(recipe_obj)
+
+    def display_menu(self):
+        user_choice = self._adaptee_ui.print_menu()
+        return user_choice

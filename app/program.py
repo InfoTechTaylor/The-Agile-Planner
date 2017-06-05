@@ -5,13 +5,28 @@ This version of the app is implementing the singleton, facade, adapter and facto
 along with the iterator design pattern"""
 
 from app.ui import user
-from app.recipe import recipe_facade
+from app.recipe import recipe
+from app.recipe import recipe_box
 from app.ui import adapter
 from app.design_patterns import iterator
 
 
-
 def main():
+    # setup tasks
+    # create RecipeBox instance
+    recipe_box_obj = recipe_box.RecipeBox.create_recipe_box()
+
+    # create hard coded recipes (in place of a DB implementation)
+    recipe1 = recipe.Recipe('hummus', 98, 5.5, 9.9, 3.5)
+    recipe2 = recipe.Recipe('banana pancakes', 240, 9.5, 34.8, 6)
+    recipe3 = recipe.Recipe('scrambled tofu breakfast burrito', 441, 5, 53.5, 16.5)
+    recipe4 = recipe.Recipe('super green smoothie', 225, 9.7, 36.8, 5.8)
+
+    # add recipes to recipe box
+    recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe1)
+    recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe2)
+    recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe3)
+    recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe4)
 
     # get user's name (in place of a login function to do if planning on having real users)
     user_name = input('Please enter your name to start the program:  ')
@@ -22,33 +37,36 @@ def main():
     adapter_obj = adapter.UIAdapter()
     adapter_obj.display_banner(user_obj.name)
 
-    # Use Case #1 Precondition: Make RecipeBox instance
-    recipe_facade_obj = recipe_facade.RecipeFacade()  # create facade object to access recipe module
-    recipe_box_obj = recipe_facade_obj.create_recipe_box()  # create recipe box to add recipes to
+    run_program = True
+    while run_program is True:
 
-    # Use Case #1 Precondition: populate RecipeBox instance with hard coded recipes (in place of DB implementation)
-    recipe1 = recipe_facade_obj.hard_code_new_recipe('hummus', 98, 5.5, 9.9, 3.5)
-    recipe2 = recipe_facade_obj.hard_code_new_recipe('banana pancakes', 240, 9.5, 34.8, 6)
-    recipe3 = recipe_facade_obj.hard_code_new_recipe('scrambled tofu breakfast burrito', 441, 5, 53.5, 16.5)
-    recipe4 = recipe_facade_obj.hard_code_new_recipe('super green smoothie', 225, 9.7, 36.8, 5.8)
+        user_choice = adapter_obj.display_menu()  # display menu options, get user's choice
 
-    # TODO update add recipe to box function to take a list to reduce lines of code
-    recipe_facade_obj.add_recipe_to_box(recipe_box_obj, recipe1)
-    recipe_facade_obj.add_recipe_to_box(recipe_box_obj, recipe2)
-    recipe_facade_obj.add_recipe_to_box(recipe_box_obj, recipe3)
-    recipe_facade_obj.add_recipe_to_box(recipe_box_obj, recipe4)
+        if user_choice == str(1):
+            new_recipe = recipe.Recipe.add_new_recipe()
+            recipe_box_obj.add_recipe_to_box(recipe_box_obj, new_recipe)
+        elif user_choice == str(2):
+            # Use Case #1 steps to display each recipe in the recipe box collection
+            # iterator design pattern implementation:
+            recipe_count = len(recipe_box_obj.recipe_obj_list)
+            recipe_box_iterator = iterator.RecipeBoxIterator(recipe_count)
+            print()
+            while True:
+                try:
+                    recipe_index = recipe_box_iterator.__next__()
+                    recipe_obj = recipe_box_obj.recipe_obj_list[recipe_index]
+                    adapter_obj.display_recipe(recipe_obj)
+                except StopIteration:
+                    break
+        elif user_choice == str(3):
+            print('Edit recipe feature coming soon!')
+            print()
+        elif user_choice == str(4):
+            pass
+        elif user_choice == str(5):
+            run_program = False
 
-    # Use Case #1 steps to display each recipe in the recipe box collection
-    recipe_count = len(recipe_box_obj.recipe_obj_list)
-    recipe_box_iterator = iterator.RecipeBoxIterator(recipe_count)
-    print()
-    while True:
-        try:
-            recipe_index = recipe_box_iterator.__next__()
-            recipe = recipe_box_obj.recipe_obj_list[recipe_index]
-            adapter_obj.display_recipe(recipe)
-        except StopIteration:
-            break
+
 
 
 if __name__ == '__main__':

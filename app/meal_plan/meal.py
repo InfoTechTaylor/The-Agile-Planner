@@ -10,6 +10,9 @@ class AbstractMeal(ABC):
     def add_recipe(self, meal_obj, recipe_obj):
         meal_obj.recipe = recipe_obj
 
+    def update(self):
+        pass
+
 
 class Breakfast(AbstractMeal):
     def __init__(self):
@@ -17,11 +20,14 @@ class Breakfast(AbstractMeal):
         self.meal_type = 'Breakfast'
 
     def add_recipe(self, meal_obj, recipe_obj):
-        meal_obj.recipe = recipe_obj
+        meal_obj.recipe_list.append(recipe_obj)
         print()
         print('New recipe added to your breakfast!')
         print('Recipe Name: ' + recipe_obj.recipe_name)
         print('Total Calories: ' + recipe_obj.calories)
+
+    def update(self):
+        pass
 
 
 class Lunch(AbstractMeal):
@@ -30,11 +36,14 @@ class Lunch(AbstractMeal):
         self.meal_type = 'Lunch'
 
     def add_recipe(self, meal_obj, recipe_obj):
-        meal_obj.recipe = recipe_obj
+        meal_obj.recipe_list.append(recipe_obj)
         print()
         print('New recipe added to your lunch!')
         print('Recipe Name: ' + recipe_obj.recipe_name)
         print('Total Calories: ' + recipe_obj.calories)
+
+    def update(self):
+        pass
 
 
 class Dinner(AbstractMeal):
@@ -43,8 +52,11 @@ class Dinner(AbstractMeal):
         self.meal_type = 'Dinner'
 
     def add_recipe(self, meal_obj, recipe_obj):
-        meal_obj.recipe = recipe_obj
+        meal_obj.recipe_list.append(recipe_obj)
         print()
         print('New recipe added to your dinner!')
         print('Recipe Name: ' + recipe_obj.recipe_name)
         print('Total Calories: ' + recipe_obj.calories)
+
+    def update(self):
+        pass
