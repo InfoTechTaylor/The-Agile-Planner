@@ -6,12 +6,12 @@ class UserInterface():
         pass
 
     @staticmethod
-    def print_welcome_banner(user_name):
+    def print_welcome_banner():
         print('***************************************************************')
         print('********************* The Agile Planner ***********************')
         print('***************************************************************')
         print()
-        print("Hello, " + user_name + "! Let's start meal planning!")
+        print("Hello! Let's start meal planning!")
 
     @staticmethod
     def print_recipe(recipe_obj):

@@ -9,7 +9,7 @@ class AbstractUIAdapter(ABC):
         self._adaptee_ui = user_interface.UserInterface()
 
     @abstractmethod
-    def display_banner(self, user_name):
+    def display_banner(self):
         raise NotImplementedError('Subclasses must implement display_options()')
 
     @abstractmethod
@@ -22,8 +22,8 @@ class AbstractUIAdapter(ABC):
 
 
 class UIAdapter(AbstractUIAdapter):
-    def display_banner(self, user_name):
-        self._adaptee_ui.print_welcome_banner(user_name)
+    def display_banner(self):
+        self._adaptee_ui.print_welcome_banner()
 
     def display_recipe(self, recipe_obj):
         self._adaptee_ui.print_recipe(recipe_obj)

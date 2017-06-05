@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 class AbstractMeal(ABC):
     def __init__(self):
-        pass
+        self.recipe_list = []
 
     @abstractmethod
     def add_recipe(self, meal_obj, recipe_obj):
@@ -24,7 +24,7 @@ class Breakfast(AbstractMeal):
         print()
         print('New recipe added to your breakfast!')
         print('Recipe Name: ' + recipe_obj.recipe_name)
-        print('Total Calories: ' + recipe_obj.calories)
+        print('Total Calories: ' + str(recipe_obj.calories))
 
     def update(self):
         pass
@@ -40,7 +40,7 @@ class Lunch(AbstractMeal):
         print()
         print('New recipe added to your lunch!')
         print('Recipe Name: ' + recipe_obj.recipe_name)
-        print('Total Calories: ' + recipe_obj.calories)
+        print('Total Calories: ' + str(recipe_obj.calories))
 
     def update(self):
         pass
@@ -56,7 +56,7 @@ class Dinner(AbstractMeal):
         print()
         print('New recipe added to your dinner!')
         print('Recipe Name: ' + recipe_obj.recipe_name)
-        print('Total Calories: ' + recipe_obj.calories)
+        print('Total Calories: ' + str(recipe_obj.calories))
 
     def update(self):
         pass

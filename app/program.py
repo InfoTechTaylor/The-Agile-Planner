@@ -9,10 +9,14 @@ from app.recipe import recipe
 from app.recipe import recipe_box
 from app.ui import adapter
 from app.design_patterns import iterator
+from app.meal_plan import meal_factory
+from app.design_patterns import command
 
 
 def main():
-    # setup tasks
+    ######################################################################################
+    # SETUP TASKS
+    ######################################################################################
     # create RecipeBox instance
     recipe_box_obj = recipe_box.RecipeBox.create_recipe_box()
 
@@ -28,46 +32,50 @@ def main():
     recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe3)
     recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe4)
 
-    # get user's name (in place of a login function to do if planning on having real users)
-    user_name = input('Please enter your name to start the program:  ')
-    user_obj = user.User(user_name)
-    print()
-
     # print app banner and custom greeting
     adapter_obj = adapter.UIAdapter()
-    adapter_obj.display_banner(user_obj.name)
+    adapter_obj.display_banner()
 
-    run_program = True
-    while run_program is True:
+    ######################################################################################
+    # ITERATOR DESIGN PATTERN IMPLEMENTATION
+    ######################################################################################
+    # iterate through recipes in recipe box to display all recipes
 
-        user_choice = adapter_obj.display_menu()  # display menu options, get user's choice
+    recipe_count = len(recipe_box_obj.recipe_obj_list)
+    recipe_box_iterator = iterator.RecipeBoxIterator(recipe_count)
+    print()
+    print('Here is the contents of your recipe box: ')
+    while True:
+        try:
+            recipe_index = recipe_box_iterator.__next__()
+            recipe_obj = recipe_box_obj.recipe_obj_list[recipe_index]
+            adapter_obj.display_recipe(recipe_obj)
+        except StopIteration:
+            break
 
-        if user_choice == str(1):
-            new_recipe = recipe.Recipe.add_new_recipe()
-            recipe_box_obj.add_recipe_to_box(recipe_box_obj, new_recipe)
-        elif user_choice == str(2):
-            # Use Case #1 steps to display each recipe in the recipe box collection
-            # iterator design pattern implementation:
-            recipe_count = len(recipe_box_obj.recipe_obj_list)
-            recipe_box_iterator = iterator.RecipeBoxIterator(recipe_count)
-            print()
-            while True:
-                try:
-                    recipe_index = recipe_box_iterator.__next__()
-                    recipe_obj = recipe_box_obj.recipe_obj_list[recipe_index]
-                    adapter_obj.display_recipe(recipe_obj)
-                except StopIteration:
-                    break
-        elif user_choice == str(3):
-            print('Edit recipe feature coming soon!')
-            print()
-        elif user_choice == str(4):
-            pass
-        elif user_choice == str(5):
-            run_program = False
+    ######################################################################################
+    # COMMAND DESIGN PATTERN IMPLEMENTATION
+    ######################################################################################
+    # create meal object: meal_obj is receiver, add_recipe is the command action
+    meal_factory_obj = meal_factory.MealFactory()
+    meal_obj_receiver = meal_factory_obj.create_meal('breakfast')
 
+    # create add recipe command to send to the invoker to hold until execution
+    add_recipe3_command = command.AddRecipeToMealCommand(meal_obj_receiver, recipe3)
+    add_recipe4_command = command.AddRecipeToMealCommand(meal_obj_receiver, recipe4)
+    add_recipe1_command = command.AddRecipeToMealCommand(meal_obj_receiver, recipe1)
 
+    # add commands to invoker list
+    command_invoker = command.Invoker()
+    command_invoker.add_command(add_recipe3_command)
+    command_invoker.add_command(add_recipe4_command)
+    command_invoker.add_command(add_recipe1_command)
 
+    # undo adding recipe1 to the meal
+    command_invoker.undo_command(add_recipe1_command)
+
+    # execute the command list that invoker holds
+    command_invoker.execute_commands()
 
 if __name__ == '__main__':
     main()
