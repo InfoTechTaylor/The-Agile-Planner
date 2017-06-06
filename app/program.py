@@ -76,6 +76,10 @@ def main():
     # execute the handle_request method throughout the chain which calculates total calories
     meal_handler.handle_request()  # calculates total calories for meal, daily meal plan, and meal plan
     print()
+    print('Total Calories Summary:')
+    print('Total Calories for ' + meal_handler.meal_type + ' : ' + str(meal_handler.total_calories))
+    print('Total Calories for the day : ' + str(daily_meal_handler.total_calories))
+    print('Total Calories for the week : ' + str(meal_plan_handler.total_calories))
 
     ######################################################################################
     # COMMAND DESIGN PATTERN IMPLEMENTATION
