@@ -59,12 +59,11 @@ def main():
     ######################################################################################
     # setup, add a meal with recipes & create handlers for each item in the chain
     meal_factory_obj = meal_factory.MealFactory()
-    # meal_handler = meal_factory_obj.create_meal('lunch')  # meal object starts the chain with no successor
-    # daily_meal_handler = meal_plan.DailyMealPlan(meal_handler)
-    # meal_plan_handler = meal_plan.MealPlan(daily_meal_handler)
     meal_plan_handler = meal_plan.MealPlan(None)
     daily_meal_handler = meal_plan.DailyMealPlan(meal_plan_handler)
-    meal_handler = meal_factory_obj.create_meal('lunch', daily_meal_handler)
+    meal_handler = meal_factory_obj.create_meal('lunch', daily_meal_handler)  # meal object starts the chain with no successor
+
+    meal_plan_handler = meal_plan.MealPlan(daily_meal_handler)
 
     # add recipes to starting meal
     meal_handler.add_recipe(meal_handler, recipe5)
@@ -82,7 +81,7 @@ def main():
     # COMMAND DESIGN PATTERN IMPLEMENTATION
     ######################################################################################
     # create meal object: meal_obj is receiver, add_recipe is the command action
-    meal_obj_receiver = meal_factory_obj.create_meal('breakfast', daily_meal_handler)
+    meal_obj_receiver = meal_factory_obj.create_meal('breakfast', None)
 
     # create add recipe command to send to the invoker to hold until execution
     add_recipe3_command = command.AddRecipeToMealCommand(meal_obj_receiver, recipe3)

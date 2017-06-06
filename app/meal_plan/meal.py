@@ -43,6 +43,7 @@ class Lunch(AbstractMeal, chain_of_responsibility.AbstractHandler):
     def __init__(self, successor):
         super().__init__()
         self.meal_type = 'Lunch'
+        self.successor = successor
 
     def add_recipe(self, meal_obj, recipe_obj):
         meal_obj.recipe_list.append(recipe_obj)
@@ -58,10 +59,8 @@ class Lunch(AbstractMeal, chain_of_responsibility.AbstractHandler):
         return self.total_calories
 
     def handle_request(self):
-        if True:
-            pass
-        elif self.successor is not None:
-            self.successor.handle_request()
+        self.calculate_calories()
+        self.successor.handle_request()
 
 
 class Dinner(AbstractMeal, chain_of_responsibility.AbstractHandler):
