@@ -63,8 +63,6 @@ def main():
     daily_meal_handler = meal_plan.DailyMealPlan(meal_plan_handler)
     meal_handler = meal_factory_obj.create_meal('lunch', daily_meal_handler)  # meal object starts the chain with no successor
 
-    meal_plan_handler = meal_plan.MealPlan(daily_meal_handler)
-
     # add recipes to starting meal
     meal_handler.add_recipe(meal_handler, recipe5)
     meal_handler.add_recipe(meal_handler, recipe6)
@@ -75,6 +73,7 @@ def main():
 
     # execute the handle_request method throughout the chain which calculates total calories
     meal_handler.handle_request()  # calculates total calories for meal, daily meal plan, and meal plan
+
     print()
     print('Total Calories Summary:')
     print('Total Calories for ' + meal_handler.meal_type + ' : ' + str(meal_handler.total_calories))
