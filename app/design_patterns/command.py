@@ -14,9 +14,13 @@ class Invoker:
     def execute_commands(self):
         for command in self._commands_list:
             command.execute_command()
+        self._commands_list = []
 
     def undo_command(self, command):
         self._commands_list.remove(command)
+
+    def clear_commands(self):
+        self._commands_list = []
 
 
 class AbstractCommand(ABC):

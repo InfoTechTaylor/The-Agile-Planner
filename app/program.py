@@ -4,13 +4,10 @@ This app was written using Python version 3.5.2
 This version of the app is implementing the singleton, facade, adapter and factory design patterns
 along with the iterator design pattern"""
 
-from app.ui import user
-from app.recipe import recipe
-from app.recipe import recipe_box
+from app.recipe import recipe, recipe_box
 from app.ui import adapter
-from app.design_patterns import iterator
-from app.meal_plan import meal_factory
-from app.design_patterns import command
+from app.meal_plan import meal_factory, meal_plan
+from app.design_patterns import command, iterator
 
 
 def main():
@@ -25,12 +22,16 @@ def main():
     recipe2 = recipe.Recipe('banana pancakes', 240, 9.5, 34.8, 6)
     recipe3 = recipe.Recipe('scrambled tofu breakfast burrito', 441, 5, 53.5, 16.5)
     recipe4 = recipe.Recipe('super green smoothie', 225, 9.7, 36.8, 5.8)
+    recipe5 = recipe.Recipe('thai salad with peanut tempeh', 441, 23.7, 43.3, 21.1)
+    recipe6 = recipe.Recipe('marinated peanut tempeh', 250, 15.2, 19.3, 13.4)
 
     # add recipes to recipe box
     recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe1)
     recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe2)
     recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe3)
     recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe4)
+    recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe5)
+    recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe6)
 
     # print app banner and custom greeting
     adapter_obj = adapter.UIAdapter()
@@ -54,11 +55,34 @@ def main():
             break
 
     ######################################################################################
+    # CHAIN OF RESPONSIBILITY DESIGN PATTERN IMPLEMENTATION
+    ######################################################################################
+    # setup, add a meal with recipes & create handlers for each item in the chain
+    meal_factory_obj = meal_factory.MealFactory()
+    # meal_handler = meal_factory_obj.create_meal('lunch')  # meal object starts the chain with no successor
+    # daily_meal_handler = meal_plan.DailyMealPlan(meal_handler)
+    # meal_plan_handler = meal_plan.MealPlan(daily_meal_handler)
+    meal_plan_handler = meal_plan.MealPlan(None)
+    daily_meal_handler = meal_plan.DailyMealPlan(meal_plan_handler)
+    meal_handler = meal_factory_obj.create_meal('lunch', daily_meal_handler)
+
+    # add recipes to starting meal
+    meal_handler.add_recipe(meal_handler, recipe5)
+    meal_handler.add_recipe(meal_handler, recipe6)
+
+    # add meal to a day's meal plan, then add that day meal plan to the overall meal plan
+    daily_meal_handler.add_meal(meal_handler)
+    meal_plan_handler.add_daily_meal_plan(daily_meal_handler)
+
+    # execute the handle_request method throughout the chain which calculates total calories
+    meal_handler.handle_request()  # calculates total calories for meal, daily meal plan, and meal plan
+    print()
+
+    ######################################################################################
     # COMMAND DESIGN PATTERN IMPLEMENTATION
     ######################################################################################
     # create meal object: meal_obj is receiver, add_recipe is the command action
-    meal_factory_obj = meal_factory.MealFactory()
-    meal_obj_receiver = meal_factory_obj.create_meal('breakfast')
+    meal_obj_receiver = meal_factory_obj.create_meal('breakfast', daily_meal_handler)
 
     # create add recipe command to send to the invoker to hold until execution
     add_recipe3_command = command.AddRecipeToMealCommand(meal_obj_receiver, recipe3)
