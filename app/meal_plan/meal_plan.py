@@ -50,6 +50,6 @@ class MealPlan(chain_of_responsibility.AbstractHandler):
         return self.total_calories
 
     def handle_request(self):
-        if self.successor is not None:
-            self.calculate_calories()
-            self.successor.handle_request()
+        #if self.successor is not None:
+        self.calculate_calories()
+            #self.successor.handle_request()
