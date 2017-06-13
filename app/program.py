@@ -33,7 +33,7 @@ def main():
     recipe_box_obj.add_recipe_to_box(recipe_box_obj, recipe3)
 
     ########################################################################
-    # USE CASE 3: New User, New Goals
+    # USE CASE 1: New User, New Goals
     ########################################################################
     # Known issue: no input validation or validation that macronutrients add up to 100%
     ui_obj = user_interface.UserInterface()
@@ -64,7 +64,7 @@ def main():
     print('Daily protein goal: ' + user_obj.daily_protein_goal + '%')
 
     ########################################################################
-    # USE CASE #1 Add New Recipe
+    # USE CASE #2 Add New Recipe
     ########################################################################
     print()
     print('Let\'s start by adding a new recipe.')
@@ -74,7 +74,7 @@ def main():
     ui_obj.print_recipe(recipe_obj)
 
     ########################################################################
-    # USE CASE #2 Meal Planning
+    # USE CASE #3 Meal Planning
     ########################################################################
     # 1. browse and select a recipe
     print()
