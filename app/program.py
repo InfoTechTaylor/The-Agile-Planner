@@ -100,7 +100,7 @@ def main():
     print()
     print('#######################################################################################')
     print('Displaying your meal plan for the week of ' + week_meal_plan.start_date + ':')
-    print('Day: ' + day_meal_plan.day_of_week)
+    print('Day: ' + day_meal_plan.day_of_week + ' has total of ' + str(day_meal_plan.total_calories) + ' calories!')
     print('Meal: ' + meal_obj.meal_type)
     print('Recipe(s): ' + selected_recipe.recipe_name)
     print('#######################################################################################')
