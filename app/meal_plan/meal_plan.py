@@ -1,15 +1,14 @@
 """meal plan module for MealPlan and DailyMealPlan classes"""
 
-from app.design_patterns import chain_of_responsibility
 from app.meal_plan import meal
 
 
-class DailyMealPlan(chain_of_responsibility.AbstractHandler):
+class DailyMealPlan():
 
-    def __init__(self, successor):
-        super().__init__(successor)
+    def __init__(self, day_of_week):
+        self.day_of_week = day_of_week
         self.breakfast = meal.Breakfast()
-        self.lunch = meal.Lunch(successor)
+        self.lunch = meal.Lunch()
         self.dinner = meal.Dinner()
         self.total_calories = 0
 
@@ -22,34 +21,27 @@ class DailyMealPlan(chain_of_responsibility.AbstractHandler):
         elif meal_obj.meal_type == 'Dinner':
             self.dinner = meal_obj
 
+        return self
+
     def calculate_calories(self):
         self.total_calories = self.breakfast.total_calories + self.lunch.total_calories + self.dinner.total_calories
         return self.total_calories
 
-    def handle_request(self):
-        self.calculate_calories()
-        self.successor.handle_request()
 
+class MealPlan():
 
-class MealPlan(chain_of_responsibility.AbstractHandler):
-
-    def __init__(self, successor):
-        super().__init__(successor)
+    def __init__(self, start_date):
+        self.start_date = start_date
         self.daily_meal_plan_list = []
-        # self.sunday = DailyMealPlan()
-
         self.total_calories = 0
 
     def add_daily_meal_plan(self, daily_meal_plan):
         self.daily_meal_plan_list.append(daily_meal_plan)
+
+        return self
 
     def calculate_calories(self):
         for meal_plan in self.daily_meal_plan_list:
             self.total_calories += meal_plan.total_calories
 
         return self.total_calories
-
-    def handle_request(self):
-        #if self.successor is not None:
-        self.calculate_calories()
-            #self.successor.handle_request()
