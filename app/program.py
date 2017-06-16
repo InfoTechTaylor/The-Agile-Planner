@@ -82,7 +82,7 @@ def main():
     selected_recipe = recipe_box_obj.select_recipe()
 
     # 2. add recipe to meal
-    meal_obj = meal.Lunch()
+    meal_obj = meal.Meal('Lunch')
     meal_obj.add_recipe(meal_obj, selected_recipe)
     meal_obj.calculate_calories()
 

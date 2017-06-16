@@ -1,16 +1,14 @@
 """meal plan module for MealPlan and DailyMealPlan classes"""
 
-from app.meal_plan import meal
 
-
-class DailyMealPlan():
+class DailyMealPlan:
 
     def __init__(self, day_of_week):
         self.day_of_week = day_of_week
-        self.breakfast = meal.Breakfast()
-        self.lunch = meal.Lunch()
-        self.dinner = meal.Dinner()
         self.total_calories = 0
+        self.breakfast = None
+        self.lunch = None
+        self.dinner = None
 
     def add_meal(self, meal_obj):
 
@@ -28,7 +26,7 @@ class DailyMealPlan():
         return self.total_calories
 
 
-class MealPlan():
+class MealPlan:
 
     def __init__(self, start_date):
         self.start_date = start_date
