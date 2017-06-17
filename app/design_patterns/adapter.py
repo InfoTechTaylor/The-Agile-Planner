@@ -27,7 +27,3 @@ class UIAdapter(AbstractUIAdapter):
 
     def display_recipe(self, recipe_obj):
         self._adaptee_ui.print_recipe(recipe_obj)
-
-    def display_menu(self):
-        user_choice = self._adaptee_ui.print_menu()
-        return user_choice
