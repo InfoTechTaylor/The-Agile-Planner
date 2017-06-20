@@ -10,5 +10,5 @@ class GroceryList(metaclass=singleton.Singleton):
         self.grocery_list.append(item)
 
     def add_recipe_ingredients(self, recipe_obj):
-        for ingredient in recipe_obj.list:
+        for ingredient in recipe_obj.ingredients_list:
             self.add_item_to_list(ingredient)

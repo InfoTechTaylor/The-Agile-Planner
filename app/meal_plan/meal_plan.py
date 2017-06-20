@@ -25,10 +25,6 @@ class DailyMealPlan:
 
         return self
 
-    def calculate_calories(self):
-        self.total_calories = self.breakfast.total_calories + self.lunch.total_calories + self.dinner.total_calories
-        return self.total_calories
-
 
 class MealPlan:
 
@@ -41,9 +37,3 @@ class MealPlan:
         self.list.append(daily_meal_plan)
 
         return self
-
-    def calculate_calories(self):
-        for meal_plan in self.list:
-            self.total_calories += meal_plan.total_calories
-
-        return self.total_calories
